@@ -19,8 +19,8 @@ public class AccountController {
 
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody AccountCreateDto accountCreateDto) {
-        if(StringUtils.isNotBlank(accountCreateDto.getAccountNumber())){
-            if(!accountCreateDto.getInitialBalance().equals(BigDecimal.ZERO)){
+        if (StringUtils.isNotBlank(accountCreateDto.getAccountNumber())) {
+            if (!accountCreateDto.getInitialBalance().equals(BigDecimal.ZERO)) {
 
                 return new ResponseEntity<>(accountService.createAccount(accountCreateDto), HttpStatus.CREATED);
             }
@@ -31,7 +31,7 @@ public class AccountController {
 
     @GetMapping("/{accountNumber}")
     public ResponseEntity<Account> getAccountInfo(@PathVariable String accountNumber) {
-        if(StringUtils.isNotBlank(accountNumber)){
+        if (StringUtils.isNotBlank(accountNumber)) {
             return ResponseEntity.ok(accountService.getAccountInfo(accountNumber));
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid account number");
